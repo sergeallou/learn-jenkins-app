@@ -22,7 +22,7 @@ pipeline {
         stage('ECE') {
             agent {
                 docker {
-                    image 'mcr.microsoft.com/playwright:v1.51.1-jammy'
+                    image 'mcr.microsoft.com/playwright:v1.39.0-noble'
                     reuseNode true
                 }
             }
