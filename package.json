@@ -49,8 +49,5 @@
     "titleTemplate": "{classname}-{title}",
     "ancestorSeparator": " › ",
     "usePathForSuiteName": "true"
-  },
-  "jest": {
-    "reporters": ["default", "jest-junit"]
   }
 }
