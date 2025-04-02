@@ -1,24 +1,23 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
-            agent {
-                docker {
-                    image 'node:18-alpine'
-                    reuseNode true
-                }
-            }
-            steps {
-                sh '''
-                    ls -la
-                    node --version
-                    npm --version
-                    npm ci
-                    npm run build
-                    ls -la
-                '''
-            }
+        stage('Tests'){
+            parallel {
+                stage(' Unit test') {
+                    agent {
+                        docker {
+                            image 'node:18-alpine'
+                            reuseNode true
+                        }
+                    }
+                    steps {
+                        sh '''
+                            #test -f build/index.html
+                            npm run test
+                        '''
+                    }
         }
+
         stage('ECE') {
             agent {
                 docker {
@@ -36,6 +35,12 @@ pipeline {
             }
         }
     }
+                    
+                }
+            }
+        }
+
+
     post {
         always {
             junit 'jest-results/junit.xml'
